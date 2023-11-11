@@ -1,5 +1,5 @@
 
-const Transition = () => {
+const Transition = ( ) => {
 
 
 
@@ -7,7 +7,8 @@ const Transition = () => {
     <main className="m-2">
       <section className="SecContainer bg-gradient-to-b from-pink-100 to-pink-200 h-screen myRounded space-y-3 py-2">
           <div className="flex justify-center items-center">
-            <h2 className="font-bold text-2xl text-pink-900">Transition</h2>
+          <h2 className="font-bold text-2xl text-pink-900">Transition</h2>
+       
           </div>
         <div className="flex justify-center items-center ">
           {/* All transition lists */}

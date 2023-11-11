@@ -3,11 +3,13 @@
 import { useState } from "react";
    
 const Hero = () => {  
+   // const router = useRouter();
    const [bank, setBank] = useState(0);
    const [optionValueProvider, setOptionValueProvider] = useState();
    const [optionIdProvider, setOptionIdProvider] = useState();
    const [amount, setAmount] = useState();
    const [expenseAmount, setExpenseAmount] = useState(0); 
+   // const [test, setTest] = useState(1);
    
    // handle input
    const handleInput = (e) => {
@@ -19,31 +21,35 @@ const Hero = () => {
    // handle submit
    const handleSubmit = (e) => {
       // const eatingCost = amount;
-      e.preventDefault(); 
-
+      e.preventDefault();  
 
             // condition
       if ('addMoneyId' === optionIdProvider) {
          const addMoneyCalculate = bank + amount;
          setBank(addMoneyCalculate);
          console.log('addMoney id is connected ', optionIdProvider);
+
       } else if ('productId' === optionIdProvider) {
          const productCalculate = expenseAmount + amount;
          setExpenseAmount(productCalculate);
+
       }else if ('withdrawalId' === optionIdProvider) {
          const withdrawalCalculate = bank - amount;
          setBank(withdrawalCalculate);
+
       } else if ('cashId' === optionIdProvider) {
          const cashCalculate = bank + amount;
          setBank(cashCalculate);
+
       } else if ('eatingId' === optionIdProvider && amount < bank) {
          const eatingCalculate = amount + expenseAmount;
-        setExpenseAmount(eatingCalculate);  
+         setExpenseAmount(eatingCalculate);  
+         
       } else {
          alert('amount is low');
          console.log('id is not connected ', optionIdProvider);
 
-      }
+      } 
 
       console.log(optionIdProvider, amount);
    }
@@ -61,7 +67,6 @@ const Hero = () => {
    return (
       
       <section className="m-2 myRounded bg-gray-100">
-
            <div className="grid grid-cols-5 text-center gap-2 p-2">
                <div className="h-36 myRounded myFontStyle col-span-5 bg-gradient-to-b from-purple-400 to-purple-500">
                   <h3 className="text-2xl text-purple-900">Total Budget Bank</h3>
