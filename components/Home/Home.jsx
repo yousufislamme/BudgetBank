@@ -8,8 +8,7 @@ const Hero = () => {
    const [optionValueProvider, setOptionValueProvider] = useState();
    const [optionIdProvider, setOptionIdProvider] = useState();
    const [amount, setAmount] = useState();
-   const [expenseAmount, setExpenseAmount] = useState(0); 
-   // const [test, setTest] = useState(1);
+   const [expenseAmount, setExpenseAmount] = useState(0);  
    
    // handle input
    const handleInput = (e) => {
@@ -67,9 +66,10 @@ const Hero = () => {
    return (
       
       <section className="m-2 myRounded bg-gray-100">
+         
            <div className="grid grid-cols-5 text-center gap-2 p-2">
                <div className="h-36 myRounded myFontStyle col-span-5 bg-gradient-to-b from-purple-400 to-purple-500">
-                  <h3 className="text-2xl text-purple-900">Total Budget Bank</h3>
+               <h3 className="text-2xl text-purple-900">Total Budget Bank</h3>
                <p><span>$</span>{bank}</p>
                </div> 
               <div className="col-span-3 myRounded myFontStyle bg-gradient-to-r from-sky-400 to-sky-600">
@@ -90,8 +90,7 @@ const Hero = () => {
                >
                   <div className='flex flex-col justify-center items-center gap-y-3'>
                      
-                  <h3 className='myFontStyle text-gray-700'>Now Send</h3>
-                  <p>{ amount}</p>
+                  <h3 className='myFontStyle text-gray-700'>Now Send</h3> 
                    
                      <div className="flex justify-center flex-col text-center">
 
@@ -99,6 +98,7 @@ const Hero = () => {
                         id="items"
                         value={optionValueProvider}
                         onChange={handleChangeOption}
+                        className="bg-yellow-100 px-2 py-1 rounded-md font-semibold"
                      >
                            <option id="productId" value="Products">Products</option>
                            <option id="addMoneyId" value="Add Money">Add Money</option>
@@ -120,7 +120,6 @@ const Hero = () => {
                            className='bg-orange-500 shadow-lg myRounded font-semibold focus:bg-red-500 mb-5' 
                      >Submit
                      </button>   
-                 
                   </div>
                   </form>
             </div>
