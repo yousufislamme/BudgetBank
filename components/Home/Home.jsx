@@ -1,15 +1,16 @@
 "use client"
 
 import { useState } from "react";
-   
+import ButtonComponent from "../../context/ButtonComponent";
+
 const Hero = () => {  
-   // const router = useRouter();
    const [bank, setBank] = useState(0);
    const [optionValueProvider, setOptionValueProvider] = useState();
    const [optionIdProvider, setOptionIdProvider] = useState();
    const [amount, setAmount] = useState();
    const [expenseAmount, setExpenseAmount] = useState(0);  
-   
+ 
+
    // handle input
    const handleInput = (e) => {
       let inputText = e.target.value;
@@ -91,7 +92,7 @@ const Hero = () => {
                   <div className='flex flex-col justify-center items-center gap-y-3'>
                      
                   <h3 className='myFontStyle text-gray-700'>Now Send</h3> 
-                   
+                 
                      <div className="flex justify-center flex-col text-center">
 
                      <select
@@ -119,7 +120,11 @@ const Hero = () => {
                            onClick={handleSubmit}
                            className='bg-orange-500 shadow-lg myRounded font-semibold focus:bg-red-500 mb-5' 
                      >Submit
-                     </button>   
+                  </button>  
+                  <ButtonComponent />
+                    
+                  
+               
                   </div>
                   </form>
             </div>
