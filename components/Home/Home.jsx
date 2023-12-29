@@ -5,10 +5,10 @@ import ButtonComponent from "../../context/ButtonComponent";
 
 const Hero = () => {  
    const [bank, setBank] = useState(0);
-   const [optionValueProvider, setOptionValueProvider] = useState();
-   const [optionIdProvider, setOptionIdProvider] = useState();
    const [amount, setAmount] = useState();
    const [expenseAmount, setExpenseAmount] = useState(0);  
+   const [optionIdProvider, setOptionIdProvider] = useState();
+   const [optionValueProvider, setOptionValueProvider] = useState();
  
 
    // handle input
@@ -20,20 +20,21 @@ const Hero = () => {
    
    // handle submit
    const handleSubmit = (e) => {
-      // const eatingCost = amount;
+      const eatingCost = amount;
       e.preventDefault();  
 
-            // condition
+// condition
       if ('addMoneyId' === optionIdProvider) {
-         const addMoneyCalculate = bank + amount;
+         const addMoneyCalculate = bank + amount ;
          setBank(addMoneyCalculate);
-         console.log('addMoney id is connected ', optionIdProvider);
-
-      } else if ('productId' === optionIdProvider) {
+         console.log('addMoney id is connected ', optionIdProvider); 
+        
+      }
+      else if ('productId' === optionIdProvider) {
          const productCalculate = expenseAmount + amount;
          setExpenseAmount(productCalculate);
 
-      }else if ('withdrawalId' === optionIdProvider) {
+      } else if ('withdrawalId' === optionIdProvider) {
          const withdrawalCalculate = bank - amount;
          setBank(withdrawalCalculate);
 
@@ -50,8 +51,7 @@ const Hero = () => {
          console.log('id is not connected ', optionIdProvider);
 
       } 
-
-      console.log(optionIdProvider, amount);
+ 
    }
 
    // handle change option
@@ -60,7 +60,7 @@ const Hero = () => {
       setOptionIdProvider(optionID); // for id provider
       const optionValue = optionID.value;
       setOptionValueProvider(optionValue); // for value provider
-      console.log(optionValue); 
+      console.log('option value is : ', optionValue); 
    }
    const currentBalanceIs = bank - expenseAmount;
 
@@ -101,8 +101,8 @@ const Hero = () => {
                         onChange={handleChangeOption}
                         className="bg-yellow-100 px-2 py-1 rounded-md font-semibold"
                      >
-                           <option id="productId" value="Products">Products</option>
                            <option id="addMoneyId" value="Add Money">Add Money</option>
+                           <option id="productId" value="Products">Products</option>
                            <option id="withdrawalId" value="Withdrawal">Withdrawal</option>
                            <option id="cashId" value="Cash">Cash</option>
                            <option id="eatingId" value="Eating">Eating</option>
