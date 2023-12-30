@@ -1,3 +1,4 @@
+import DisplayData from "./DisplayData";
 
 const Transition = ( ) => {
 
@@ -5,6 +6,9 @@ const Transition = ( ) => {
 
   return (
     <main className="m-2">
+      <div>
+        <DisplayData />
+      </div>
       <section className="SecContainer bg-gradient-to-b from-pink-100 to-pink-200 h-screen myRounded space-y-3 py-2">
           <div className="flex justify-center items-center">
           <h2 className="font-bold text-2xl text-pink-900">Transition</h2>

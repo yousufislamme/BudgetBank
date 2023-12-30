@@ -1,8 +1,11 @@
 "use client"
 
+import { useMyContext } from "@/context/MyContext";
 import { useState } from "react";
    
 const Hero = () => {  
+   const { data, updateData } = useMyContext();
+
    // const router = useRouter();
    const [bank, setBank] = useState(0);
    const [optionValueProvider, setOptionValueProvider] = useState();
@@ -11,6 +14,13 @@ const Hero = () => {
    const [expenseAmount, setExpenseAmount] = useState(0); 
    // const [test, setTest] = useState(1);
    
+
+   // handle change
+   const handleChange = (e) => {
+      updateData(e.target.value);
+   }
+
+
    // handle input
    const handleInput = (e) => {
       let inputText = e.target.value;
@@ -91,7 +101,7 @@ const Hero = () => {
                   <div className='flex flex-col justify-center items-center gap-y-3'>
                      
                   <h3 className='myFontStyle text-gray-700'>Now Send</h3>
-                  <p>{ amount}</p>
+                  {/* <p>{ amount}</p> */}
                    
                      <div className="flex justify-center flex-col text-center">
 
@@ -114,6 +124,14 @@ const Hero = () => {
                         className='outline-none myRounded font-semibold shadow-lg'
                         
                         />
+                     <input 
+                        type="text"
+                        placeholder="Commit"
+                        value={data}
+                        onChange={handleChange}
+                        className='outline-none myRounded font-semibold shadow-lg'
+                        
+                        />
                      <button
                            type="submit" 
                            onClick={handleSubmit}
@@ -131,6 +149,8 @@ const Hero = () => {
      </section>
            
   )
-}
+};
+
+
 
 export default Hero;
