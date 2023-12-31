@@ -9,7 +9,7 @@ const Hero = () => {
    // const router = useRouter();
    const [bank, setBank] = useState(0);
    const [optionValueProvider, setOptionValueProvider] = useState();
-   const [optionIdProvider, setOptionIdProvider] = useState();
+   const [optionIdProvider, setOptionIdProvider] = useState('addMoneyId');
    const [amount, setAmount] = useState();
    const [expenseAmount, setExpenseAmount] = useState(0); 
    // const [test, setTest] = useState(1);
@@ -56,7 +56,7 @@ const Hero = () => {
          setExpenseAmount(eatingCalculate);  
          
       } else {
-         alert('amount is low');
+         
          console.log('id is not connected ', optionIdProvider);
 
       } 
@@ -104,14 +104,13 @@ const Hero = () => {
                   {/* <p>{ amount}</p> */}
                    
                      <div className="flex justify-center flex-col text-center">
-
+                     <p>show me { optionIdProvider}</p>
                      <select
                         id="items"
                         value={optionValueProvider}
-                        onChange={handleChangeOption}
-                     >
-                           <option id="productId" value="Products">Products</option>
+                        onChange={handleChangeOption}>
                            <option id="addMoneyId" value="Add Money">Add Money</option>
+                           <option id="productId" value="Products">Products</option>
                            <option id="withdrawalId" value="Withdrawal">Withdrawal</option>
                            <option id="cashId" value="Cash">Cash</option>
                            <option id="eatingId" value="Eating">Eating</option>
