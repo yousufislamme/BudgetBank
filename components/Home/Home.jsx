@@ -11,8 +11,8 @@ const Hero = () => {
    const [optionValueProvider, setOptionValueProvider] = useState();
    const [optionIdProvider, setOptionIdProvider] = useState('addMoneyId');
    const [amount, setAmount] = useState();
+   const [inputValue, setInputValue] = useState('');
    const [expenseAmount, setExpenseAmount] = useState(0); 
-   // const [test, setTest] = useState(1);
    
 
    // handle change
@@ -22,11 +22,13 @@ const Hero = () => {
 
 
    // handle input
+   
    const handleInput = (e) => {
       let inputText = e.target.value;
       const inputStrToNum = parseFloat(inputText);
-      setAmount(inputStrToNum); 
-   }
+      setAmount(inputStrToNum);
+      setInputValue(inputText);
+  };
    
    // handle submit
    const handleSubmit = (e) => {
@@ -60,8 +62,11 @@ const Hero = () => {
          console.log('id is not connected ', optionIdProvider);
 
       } 
-
       console.log(optionIdProvider, amount);
+
+      // clear input fill
+      setInputValue('');
+
    }
 
    // handle change option
@@ -104,7 +109,6 @@ const Hero = () => {
                   {/* <p>{ amount}</p> */}
                    
                      <div className="flex justify-center flex-col text-center">
-                     <p>show me { optionIdProvider}</p>
                      <select
                         id="items"
                         value={optionValueProvider}
@@ -118,6 +122,7 @@ const Hero = () => {
                      </div>
                      <input 
                         type="number"
+                        value={inputValue}
                         placeholder="Enter Amount"
                         onChange={handleInput}
                         className='outline-none myRounded font-semibold shadow-lg'
