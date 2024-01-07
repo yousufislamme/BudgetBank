@@ -10,6 +10,6 @@ export default function Home() {
         <Hero />
         <Transition />
       </MyProvider>
-    </main>
+    </main >
   )
 }
