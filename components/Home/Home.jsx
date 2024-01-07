@@ -3,37 +3,40 @@
 import { useMyContext } from "@/context/MyContext";
 import { useState } from "react";
    
-const Hero = () => {  
-   const { data, updateData } = useMyContext();
-
+const Hero = () => {
+   const { updateData } = useMyContext();
+   const [commitProvide, setCommitProvide] = useState();
    // const router = useRouter();
    const [bank, setBank] = useState(0);
    const [optionValueProvider, setOptionValueProvider] = useState();
    const [optionIdProvider, setOptionIdProvider] = useState('addMoneyId');
    const [amount, setAmount] = useState();
    const [inputValue, setInputValue] = useState('');
-   const [expenseAmount, setExpenseAmount] = useState(0); 
-   
+   const [expenseAmount, setExpenseAmount] = useState(0);
+   const [clickCount, setClickCount] = useState(0);
+   const [outputText, setOutputText] = useState([]);
 
    // handle change
-   const handleChange = (e) => {
-      updateData(e.target.value);
+   const handleCommitChange = (e) => {
+      const commitInputValue = e.target.value;
+      setCommitProvide(commitInputValue); 
    }
-
-
-   // handle input
+   // handle amount input
    
    const handleInput = (e) => {
       let inputText = e.target.value;
       const inputStrToNum = parseFloat(inputText);
       setAmount(inputStrToNum);
       setInputValue(inputText);
-  };
-   
+  }; 
+ 
    // handle submit
    const handleSubmit = (e) => {
       // const eatingCost = amount;
       e.preventDefault();  
+      const idIs = Math.floor(Math.random() * 10000);
+
+      const dataCollect = [{ optionId: optionIdProvider, id: idIs, value: amount, commit: commitProvide || 0 }];
 
             // condition
       if ('addMoneyId' === optionIdProvider) {
@@ -58,26 +61,27 @@ const Hero = () => {
          setExpenseAmount(eatingCalculate);  
          
       } else {
-         
-         console.log('id is not connected ', optionIdProvider);
+         null;
+      }  
 
-      } 
-      console.log(optionIdProvider, amount);
-
+      updateData(dataCollect)
+ 
+      const newClickCount = commitProvide;
+         setClickCount(newClickCount);
       // clear input fill
-      setInputValue('');
-
+      setInputValue(''); 
+      setCommitProvide('');
    }
-
+ 
+ 
    // handle change option
    const handleChangeOption = (e) => {
       const optionID = e.target.options[e.target.selectedIndex].id;
       setOptionIdProvider(optionID); // for id provider
       const optionValue = optionID.value;
       setOptionValueProvider(optionValue); // for value provider
-      console.log(optionValue); 
    }
-   const currentBalanceIs = bank - expenseAmount;
+   const currentBalanceIs = bank - expenseAmount; 
 
    return (
       
@@ -85,9 +89,9 @@ const Hero = () => {
            <div className="grid grid-cols-5 text-center gap-2 p-2">
                <div className="h-36 myRounded myFontStyle col-span-5 bg-gradient-to-b from-purple-400 to-purple-500">
                   <h3 className="text-2xl text-purple-900">Total Budget Bank</h3>
-               <p><span>$</span>{bank}</p>
+                  <p><span>$</span>{bank}</p>
                </div> 
-              <div className="col-span-3 myRounded myFontStyle bg-gradient-to-r from-sky-400 to-sky-600">
+               <div className="col-span-3 myRounded myFontStyle bg-gradient-to-r from-sky-400 to-sky-600">
                  <h3 className="text-sky-900">Expense</h3>
                  <p>
                   <span>${expenseAmount }</span>
@@ -95,8 +99,8 @@ const Hero = () => {
                  </p>
               </div>
               <div className="col-span-2 myRounded myFontStyle bg-green-400">
-                 <h3 className="text-green-900">Today now </h3>
-               <p><span>$</span>{currentBalanceIs}</p>
+                  <h3 className="text-green-900">Today now </h3>
+                  <p><span>$</span>{currentBalanceIs}</p>
               </div>
            </div>     
            <div className="w-full flex justify-center gap-2 ">
@@ -130,9 +134,9 @@ const Hero = () => {
                         />
                      <input 
                         type="text"
-                        placeholder="Commit"
-                        value={data}
-                        onChange={handleChange}
+                        value={commitProvide}
+                        placeholder="Commit" 
+                        onChange={handleCommitChange}
                         className='outline-none myRounded font-semibold shadow-lg'
                         
                         />
@@ -141,20 +145,14 @@ const Hero = () => {
                            onClick={handleSubmit}
                            className='bg-orange-500 shadow-lg myRounded font-semibold focus:bg-red-500 mb-5' 
                      >Submit
-                     </button>   
-                 
-                  </div>
-                  </form>
-            </div>
-            
-             
-        
+                  </button>    
 
+                  </div>
+            </form>
+                
+            </div> 
      </section>
            
   )
 };
-
-
-
 export default Hero;
