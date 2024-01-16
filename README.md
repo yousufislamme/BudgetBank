@@ -16,4 +16,4 @@ Welcome to Budget Bank, the cutting-edge web and Android application designed to
 
 `Sync Across Devices:` Seamless integration between our web and Android platforms means you can access your financial information anytime, anywhere. Stay connected to your budgeting goals on the go!
 
-``Budget Bank`` is not just an app; it's a financial companion that empowers you to take control of your money. Download our app today and embark on a journey towards financial freedom! Your financial goals are within reach with Budget Bank by your side
+`Budget Bank` is not just an app; it's a financial companion that empowers you to take control of your money. Download our app today and embark on a journey towards financial freedom! Your financial goals are within reach with Budget Bank by your side

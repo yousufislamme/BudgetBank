@@ -18,6 +18,8 @@
   "devDependencies": {
     "autoprefixer": "^10",
     "postcss": "^8",
+    "prettier": "^3.2.2",
+    "prettier-plugin-tailwindcss": "^0.5.11",
     "tailwindcss": "^3"
   }
 }

@@ -2,14 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base{
-    .myRounded {
-    @apply  rounded-lg px-5 py-2;
-   }
-   .myFontStyle {
-      @apply text-xl font-bold ;
-   }
-   .SecContainer {
-      @apply container mx-auto px-5;
-   }
+@layer base {
+  .myRounded {
+    @apply rounded-lg px-5 py-2;
+  }
+  .myFontStyle {
+    @apply text-xl font-bold;
+  }
+  .SecContainer {
+    @apply container mx-auto px-5;
+  }
 }
