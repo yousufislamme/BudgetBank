@@ -1,20 +1,15 @@
-import Transition from "@/components/Transition"
-import Hero from "../components/Home/Home"
-import Header from "@/components/Header/Header"
-import { CountProvider } from "@/context/CountContext"
-import Footer from "@/components/Footer/Footer"
-
+"use client";
+import Transition from "@/components/Transition";
+import Hero from "../components/Home/Home";
+import { MyProvider } from "@/context/MyContext";
 
 export default function Home() {
   return (
-    <>
-      <CountProvider>
-        <Header />
+    <main className="m-auto max-w-xl">
+      <MyProvider>
         <Hero />
         <Transition />
-      </CountProvider>
-      <Footer />
-    </>
-
-  )
+      </MyProvider>
+    </main>
+  );
 }
