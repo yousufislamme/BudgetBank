@@ -1,58 +1,54 @@
-"use client"
+"use client";
 
+import { useMyContext } from "@/context/MyContext";
 import { useState } from "react";
-import ButtonComponent from "../../context/ButtonComponent";
 
-const Hero = () => {  
-   const [bank, setBank] = useState(0);
-   const [amount, setAmount] = useState();
-   const [expenseAmount, setExpenseAmount] = useState(0);  
-   const [optionIdProvider, setOptionIdProvider] = useState();
-   const [optionValueProvider, setOptionValueProvider] = useState();
- 
+const Hero = () => {
+  const { updateData } = useMyContext();
+  const [commitProvide, setCommitProvide] = useState();
+  // const router = useRouter();
+  const [bank, setBank] = useState(0);
+  const [optionValueProvider, setOptionValueProvider] = useState();
+  const [optionIdProvider, setOptionIdProvider] = useState("addMoneyId");
+  const [amount, setAmount] = useState();
+  const [inputValue, setInputValue] = useState("");
+  const [expenseAmount, setExpenseAmount] = useState(0);
+  const [clickCount, setClickCount] = useState(0);
+  const [outputText, setOutputText] = useState([]);
 
-   // handle input
-   const handleInput = (e) => {
-      let inputText = e.target.value;
-      const inputStrToNum = parseFloat(inputText);
-      setAmount(inputStrToNum); 
-   }
-   
-   // handle submit
-   const handleSubmit = (e) => {
-      const eatingCost = amount;
-      e.preventDefault();  
+  // handle change
+  const handleCommitChange = (e) => {
+    const commitInputValue = e.target.value;
+    setCommitProvide(commitInputValue);
+  };
+  // handle amount input
 
-// condition
-      if ('addMoneyId' === optionIdProvider) {
-         const addMoneyCalculate = bank + amount ;
-         setBank(addMoneyCalculate);
-         console.log('addMoney id is connected ', optionIdProvider); 
-        
-      }
-      else if ('productId' === optionIdProvider) {
-         const productCalculate = expenseAmount + amount;
-         setExpenseAmount(productCalculate);
+  const handleInput = (e) => {
+    let inputText = e.target.value;
+    const inputStrToNum = parseFloat(inputText);
+    setAmount(inputStrToNum);
+    setInputValue(inputText);
+  };
 
-      } else if ('withdrawalId' === optionIdProvider) {
-         const withdrawalCalculate = bank - amount;
-         setBank(withdrawalCalculate);
+  // handle submit
+  const handleSubmit = (e) => {
+    // const eatingCost = amount;
+    e.preventDefault();
+    const idIs = Math.floor(Math.random() * 10000);
 
-      } else if ('cashId' === optionIdProvider) {
-         const cashCalculate = bank + amount;
-         setBank(cashCalculate);
+    const dataCollect = [
+      {
+        optionId: optionIdProvider,
+        id: idIs,
+        value: amount,
+        commit: commitProvide || 0,
+      },
+    ];
 
-      } else if ('eatingId' === optionIdProvider && amount < bank) {
-         const eatingCalculate = amount + expenseAmount;
-         setExpenseAmount(eatingCalculate);  
-         
-      } else {
-         alert('amount is low');
-         console.log('id is not connected ', optionIdProvider);
 
       } 
  
-   }
+   
 
    // handle change option
    const handleChangeOption = (e) => {
