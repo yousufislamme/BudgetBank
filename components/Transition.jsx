@@ -4,6 +4,7 @@ import TransitionDecs from "./Transition/TransitionDecs";
 const Transition = () => {
   const { data } = useMyContext();
 
+
   // Check if data is available and not an empty array
   const allData = data && data.length > 0 ? data : null;
 
@@ -14,9 +15,15 @@ const Transition = () => {
   const ID = allData ? allData[0].id : null;
   console.log(data);
 
+const Transition = () => {  
+ 
+  const { count } = useCount();
+
+  
   return (
     <main className="m-2">
       <div>
+
         <h2>Amount : {}</h2>
         <h2>commit : {initialTranHis}</h2>
         <h2>Option : {initialOptionId}</h2>
