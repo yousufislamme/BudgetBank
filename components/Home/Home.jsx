@@ -154,7 +154,7 @@ const Hero = () => {
             <button
               type="submit"
               onClick={handleSubmit}
-              className="myRounded mb-5 bg-orange-500 font-semibold shadow-lg focus:bg-red-500"
+              className="myRounded mb-5 bg-orange-500 font-semibold text-white shadow-lg focus:bg-red-500"
             >
               Submit
             </button>
