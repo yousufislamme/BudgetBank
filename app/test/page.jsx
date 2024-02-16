@@ -1,5 +1,30 @@
+"use client";
+import { useState } from "react";
+
 const Test = () => {
-  return <div>Test</div>;
+  const [strings, setStrings] = useState([]);
+  const [currentString, setCurrentString] = useState("");
+
+  const handleButtonClick = () => {
+    setStrings((prevStrings) => [...prevStrings, currentString]);
+    setCurrentString("");
+  };
+
+  const handleInputChange = (event) => {
+    setCurrentString(event.target.value);
+  };
+
+  return (
+    <div>
+      <input type="text" value={currentString} onChange={handleInputChange} />
+      <button onClick={handleButtonClick}>Add String</button>
+      <ul>
+        {strings.map((str, index) => (
+          <li key={index}>{str}</li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 export default Test;

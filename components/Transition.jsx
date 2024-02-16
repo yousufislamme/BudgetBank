@@ -1,9 +1,7 @@
 import { useMyContext } from "@/context/MyContext";
 import TransitionDecs from "./Transition/TransitionDecs";
-
 const Transition = () => {
   const { data } = useMyContext();
-
   // Check if data is available and not an empty array
   const allData = data && data.length > 0 ? data : null;
 
@@ -31,6 +29,7 @@ const Transition = () => {
         <div className=" flex items-center justify-center ">
           <div className="flex flex-col items-center justify-center gap-2">
             {/* All transition lists */}
+
             <TransitionDecs amount={initialAmount} commit={initialTranHis} />
           </div>
         </div>
