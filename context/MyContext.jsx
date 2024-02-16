@@ -13,8 +13,12 @@ export const MyProvider = ({ children }) => {
     setCall(newData);
   };
 
+  const myHandler = () => {
+    data();
+  };
+
   return (
-    <MyContext.Provider value={{ data, call, updateData, callTran }}>
+    <MyContext.Provider value={{ data, call, updateData, callTran, myHandler }}>
       {children}
     </MyContext.Provider>
   );

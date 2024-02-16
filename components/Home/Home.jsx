@@ -1,19 +1,20 @@
 "use client";
 
-import { useMyDataContext } from "@/context/DataContext";
+import { useMyContext } from "@/context/MyContext";
 import { useState } from "react";
 
 const Hero = () => {
+  const { updateData } = useMyContext();
   const [commitProvide, setCommitProvide] = useState();
   // const router = useRouter();
   const [bank, setBank] = useState(0);
   const [optionValueProvider, setOptionValueProvider] = useState();
   const [optionIdProvider, setOptionIdProvider] = useState("addMoneyId");
   const [amount, setAmount] = useState();
+  const [inputValue, setInputValue] = useState("");
   const [expenseAmount, setExpenseAmount] = useState(0);
   const [clickCount, setClickCount] = useState(0);
-  const [inputValue, setInputValue] = useState("");
-  const { addValue } = useMyDataContext();
+  const [outputText, setOutputText] = useState([]);
 
   // handle change
   const handleCommitChange = (e) => {
@@ -21,14 +22,12 @@ const Hero = () => {
     setCommitProvide(commitInputValue);
   };
   // handle amount input
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
-  };
-  const handleInput = () => {
-    // let inputText = e.target.value;
-    // const inputStrToNum = parseFloat(inputText);
-    // setAmount(inputStrToNum);
-    // setInputValue(inputText);
+
+  const handleInput = (e) => {
+    let inputText = e.target.value;
+    const inputStrToNum = parseFloat(inputText);
+    setAmount(inputStrToNum);
+    setInputValue(inputText);
   };
 
   // handle submit
@@ -66,14 +65,11 @@ const Hero = () => {
     } else {
       null;
     }
-    // updateData(dataCollect);
+
+    updateData(dataCollect);
 
     const newClickCount = commitProvide;
     setClickCount(newClickCount);
-
-    addValue(inputValue);
-    setInputValue("");
-
     // clear input fill
     setInputValue("");
     setCommitProvide("");
@@ -145,17 +141,16 @@ const Hero = () => {
               type="number"
               value={inputValue}
               placeholder="Enter Amount"
-              onChange={handleInputChange}
+              onChange={handleInput}
               className="myRounded font-semibold shadow-lg outline-none"
             />
-            {/* <input
+            <input
               type="text"
               value={commitProvide}
               placeholder="Commit"
               onChange={handleCommitChange}
               className="myRounded font-semibold shadow-lg outline-none"
-            /> */}
-
+            />
             <button
               type="submit"
               onClick={handleSubmit}
