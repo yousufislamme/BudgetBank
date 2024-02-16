@@ -1,15 +1,15 @@
 "use client";
-import Transition from "@/components/Transition";
+import Transition from "@/components/Transition/Transition";
 import Hero from "../components/Home/Home";
-import { MyProvider } from "@/context/MyContext";
+import { MyContextProvider } from "@/context/MyDataContext";
 
 export default function Home() {
   return (
     <main className="m-auto max-w-xl">
-      <MyProvider>
+      <MyContextProvider>
         <Hero />
         <Transition />
-      </MyProvider>
+      </MyContextProvider>
     </main>
   );
 }
