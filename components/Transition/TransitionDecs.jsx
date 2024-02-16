@@ -18,8 +18,8 @@ const TransitionDecs = ({ amount, commit }) => {
             />
           </svg>
         </div>
-        <h2>
-          {commit} | {amount}
+        <h2 className="flex w-full items-center justify-between">
+          <p>{commit}</p> | <p>{amount}</p>
         </h2>
       </div>
     </>
