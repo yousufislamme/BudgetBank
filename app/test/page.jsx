@@ -6,8 +6,8 @@ const Test = () => {
   const [currentString, setCurrentString] = useState("");
 
   const handleButtonClick = () => {
-    setStrings((prevStrings) => [...prevStrings, currentString]);
-    setCurrentString("");
+    setStrings((prevStrings) => [...prevStrings, currentString]); //copy & update value
+    setCurrentString(""); // clear input
   };
 
   const handleInputChange = (event) => {

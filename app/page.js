@@ -1,15 +1,18 @@
 "use client";
 import Transition from "@/components/Transition";
 import Hero from "../components/Home/Home";
-import { MyProvider } from "@/context/MyContext";
+import { DataContext } from "@/context/DataContext"
 
-export default function Home() {
+const Home = () => {
   return (
     <main className="m-auto max-w-xl">
-      <MyProvider>
+
+      <DataContext>
         <Hero />
         <Transition />
-      </MyProvider>
+      </DataContext>
+
     </main>
   );
 }
+export default Home;

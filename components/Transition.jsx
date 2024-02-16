@@ -1,7 +1,8 @@
+"use client";
 import { useMyContext } from "@/context/MyContext";
 import TransitionDecs from "./Transition/TransitionDecs";
 const Transition = () => {
-  const { data } = useMyContext();
+  const { data } = useMyContext([]);
   // Check if data is available and not an empty array
   const allData = data && data.length > 0 ? data : null;
 
@@ -10,7 +11,6 @@ const Transition = () => {
   const initialAmount = allData ? allData[0].value : null;
   const initialOptionId = allData ? allData[0].optionId : null;
   const ID = allData ? allData[0].id : null;
-  console.log(data);
 
   return (
     <main className="m-2">
