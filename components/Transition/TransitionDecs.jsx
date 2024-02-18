@@ -1,7 +1,18 @@
+import { motion } from "framer-motion";
+
 const TransitionDecs = ({ amount, commit }) => {
   return (
     <>
-      <div className="myRounded mx-auto flex w-[350px] bg-white px-5 py-2">
+      <motion.div
+        initial={{ y: -40 }}
+        animate={{ y: 0 }}
+        transition={{
+          ease: "linear",
+          duration: 0.5,
+          x: { duration: 1 },
+        }}
+        className="myRounded mx-auto flex w-[350px] bg-white px-5 py-2"
+      >
         <div className="mr-3">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -18,10 +29,10 @@ const TransitionDecs = ({ amount, commit }) => {
             />
           </svg>
         </div>
-        <h2>
-          {commit} | {amount}
+        <h2 className="flex w-full items-center justify-between">
+          <p>{commit}</p> | <p>{amount}</p>
         </h2>
-      </div>
+      </motion.div>
     </>
   );
 };

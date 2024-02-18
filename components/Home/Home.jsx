@@ -1,12 +1,12 @@
 "use client";
 
-import { useMyContext } from "@/context/MyContext";
+import { useMyContext } from "@/context/MyDataContext";
 import { useState } from "react";
 
 const Hero = () => {
-  const { updateData } = useMyContext();
+  const { addValue, addCommit } = useMyContext();
+  const [inputDataValue, setInputDataValue] = useState();
   const [commitProvide, setCommitProvide] = useState();
-  // const router = useRouter();
   const [bank, setBank] = useState(0);
   const [optionValueProvider, setOptionValueProvider] = useState();
   const [optionIdProvider, setOptionIdProvider] = useState("addMoneyId");
@@ -14,36 +14,44 @@ const Hero = () => {
   const [inputValue, setInputValue] = useState("");
   const [expenseAmount, setExpenseAmount] = useState(0);
   const [clickCount, setClickCount] = useState(0);
-  const [outputText, setOutputText] = useState([]);
 
   // handle change
   const handleCommitChange = (e) => {
     const commitInputValue = e.target.value;
     setCommitProvide(commitInputValue);
+    console.log("commit is show", commitInputValue);
   };
   // handle amount input
 
-  const handleInput = (e) => {
-    let inputText = e.target.value;
-    const inputStrToNum = parseFloat(inputText);
+  const handleAmountInput = (e) => {
+    let inputTextStr = e.target.value;
+    const inputStrToNum = parseFloat(inputTextStr);
+    setInputDataValue(inputStrToNum);
     setAmount(inputStrToNum);
-    setInputValue(inputText);
+
+    console.log(typeof inputDataValue);
   };
 
   // handle submit
   const handleSubmit = (e) => {
     // const eatingCost = amount;
     e.preventDefault();
+    // Check if commitProvide is truthy
+    if (!commitProvide) {
+      alert("Commit is not provided. Form not submitted.");
+      return; // Exit the function early
+    }
+    // make random id generator
     const idIs = Math.floor(Math.random() * 10000);
 
-    const dataCollect = [
-      {
-        optionId: optionIdProvider,
-        id: idIs,
-        value: amount,
-        commit: commitProvide || 0,
-      },
-    ];
+    // const dataCollect = [
+    //   {
+    //     optionId: optionIdProvider,
+    //     id: idIs,
+    //     value: amount,
+    //     commit: commitProvide || 0,
+    //   },
+    // ];
 
     // condition
     if ("addMoneyId" === optionIdProvider) {
@@ -65,13 +73,14 @@ const Hero = () => {
     } else {
       null;
     }
-
-    updateData(dataCollect);
+    addValue(inputDataValue);
+    addCommit(commitProvide);
 
     const newClickCount = commitProvide;
     setClickCount(newClickCount);
+
     // clear input fill
-    setInputValue("");
+    setInputDataValue("");
     setCommitProvide("");
   };
 
@@ -83,7 +92,6 @@ const Hero = () => {
     setOptionValueProvider(optionValue); // for value provider
   };
   const currentBalanceIs = bank - expenseAmount;
-
   return (
     <section className=" myRounded m-2 bg-gray-100">
       <div className="grid grid-cols-5 gap-2 p-2 text-center">
@@ -129,8 +137,8 @@ const Hero = () => {
                 <option id="withdrawalId" value="Withdrawal">
                   Withdrawal
                 </option>
-                <option id="cashId" value="Cash">
-                  Cash
+                <option id="cashId" value="Cash In">
+                  Cash In
                 </option>
                 <option id="eatingId" value="Eating">
                   Eating
@@ -139,9 +147,9 @@ const Hero = () => {
             </div>
             <input
               type="number"
-              value={inputValue}
+              value={inputDataValue}
               placeholder="Enter Amount"
-              onChange={handleInput}
+              onChange={handleAmountInput}
               className="myRounded font-semibold shadow-lg outline-none"
             />
             <input
@@ -151,6 +159,7 @@ const Hero = () => {
               onChange={handleCommitChange}
               className="myRounded font-semibold shadow-lg outline-none"
             />
+
             <button
               type="submit"
               onClick={handleSubmit}
