@@ -2,7 +2,7 @@ import { useMyContext } from "@/context/MyDataContext";
 import TransitionDecs from "./TransitionDecs";
 
 const Transition = () => {
-  const { values, commits } = useMyContext();
+  const { values, commits } = useMyContext(); // global state
 
   console.log(values, commits);
   return (
