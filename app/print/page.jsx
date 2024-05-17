@@ -7,7 +7,7 @@ const Print = () => {
   const [printTransition, setPrintTransition] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/history")
+    fetch("https://budgetbank-server.onrender.com/history")
       .then((res) => res.json())
       .then((data) => {
         setPrintTransition(data);
@@ -16,7 +16,7 @@ const Print = () => {
   }, []);
 
   const handleDelete = (_id) => {
-    fetch(`http://localhost:5000/history/${_id}`, {
+    fetch(`https://budgetbank-server.onrender.com/history/${_id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
