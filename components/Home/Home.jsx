@@ -51,13 +51,16 @@ const Hero = () => {
     const mongodbData = { inputDataValue, commitProvide };
 
     try {
-      const response = await fetch("http://localhost:5000/history", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        "https://budgetbank-server.onrender.com/history",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(mongodbData),
         },
-        body: JSON.stringify(mongodbData),
-      });
+      );
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
