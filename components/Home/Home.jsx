@@ -5,95 +5,86 @@ import { useState } from "react";
 
 const Hero = () => {
   const { addValue, addCommit } = useMyContext();
-  const [inputDataValue, setInputDataValue] = useState();
-  const [commitProvide, setCommitProvide] = useState();
+  const [inputDataValue, setInputDataValue] = useState("");
+  const [commitProvide, setCommitProvide] = useState("");
   const [bank, setBank] = useState(0);
-  const [optionValueProvider, setOptionValueProvider] = useState();
+  const [optionValueProvider, setOptionValueProvider] = useState("");
   const [optionIdProvider, setOptionIdProvider] = useState("addMoneyId");
-  const [amount, setAmount] = useState();
-  const [inputValue, setInputValue] = useState("");
+  const [amount, setAmount] = useState(0);
   const [expenseAmount, setExpenseAmount] = useState(0);
   const [clickCount, setClickCount] = useState(0);
-
-  // handle change
+  console.log(optionValueProvider);
   const handleCommitChange = (e) => {
-    const commitInputValue = e.target.value;
-    setCommitProvide(commitInputValue);
-    console.log("commit is show", commitInputValue);
+    setCommitProvide(e.target.value);
   };
-  // handle amount input
 
   const handleAmountInput = (e) => {
-    let inputTextStr = e.target.value;
-    const inputStrToNum = parseFloat(inputTextStr);
+    const inputStrToNum = parseFloat(e.target.value);
     setInputDataValue(inputStrToNum);
     setAmount(inputStrToNum);
-
-    console.log(typeof inputDataValue);
   };
 
-  // handle submit
-  const handleSubmit = (e) => {
-    // const eatingCost = amount;
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Check if commitProvide is truthy
     if (!commitProvide) {
       alert("Commit is not provided. Form not submitted.");
-      return; // Exit the function early
+      return;
     }
-    // make random id generator
+
     const idIs = Math.floor(Math.random() * 10000);
 
-    // const dataCollect = [
-    //   {
-    //     optionId: optionIdProvider,
-    //     id: idIs,
-    //     value: amount,
-    //     commit: commitProvide || 0,
-    //   },
-    // ];
-
-    // condition
-    if ("addMoneyId" === optionIdProvider) {
-      const addMoneyCalculate = bank + amount;
-      setBank(addMoneyCalculate);
-      console.log("addMoney id is connected ", optionIdProvider);
-    } else if ("productId" === optionIdProvider) {
-      const productCalculate = expenseAmount + amount;
-      setExpenseAmount(productCalculate);
-    } else if ("withdrawalId" === optionIdProvider) {
-      const withdrawalCalculate = bank - amount;
-      setBank(withdrawalCalculate);
-    } else if ("cashId" === optionIdProvider) {
-      const cashCalculate = bank + amount;
-      setBank(cashCalculate);
-    } else if ("eatingId" === optionIdProvider && amount < bank) {
-      const eatingCalculate = amount + expenseAmount;
-      setExpenseAmount(eatingCalculate);
-    } else {
-      null;
+    if (optionIdProvider === "addMoneyId") {
+      setBank((prevBank) => prevBank + amount);
+    } else if (optionIdProvider === "productId") {
+      setExpenseAmount((prevExpense) => prevExpense + amount);
+    } else if (optionIdProvider === "withdrawalId") {
+      setBank((prevBank) => prevBank - amount);
+    } else if (optionIdProvider === "cashId") {
+      setBank((prevBank) => prevBank + amount);
+    } else if (optionIdProvider === "eatingId" && amount < bank) {
+      setExpenseAmount((prevExpense) => prevExpense + amount);
     }
+
     addValue(inputDataValue);
     addCommit(commitProvide);
 
-    const newClickCount = commitProvide;
-    setClickCount(newClickCount);
+    const mongodbData = { inputDataValue, commitProvide };
 
-    // clear input fill
+    try {
+      const response = await fetch("http://localhost:5000/history", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(mongodbData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+
     setInputDataValue("");
     setCommitProvide("");
+    setClickCount(clickCount + 1);
   };
 
-  // handle change option
   const handleChangeOption = (e) => {
     const optionID = e.target.options[e.target.selectedIndex].id;
-    setOptionIdProvider(optionID); // for id provider
-    const optionValue = optionID.value;
-    setOptionValueProvider(optionValue); // for value provider
+    setOptionIdProvider(optionID);
+    const optionValue = e.target.value;
+    setOptionValueProvider(optionValue);
   };
+
   const currentBalanceIs = bank - expenseAmount;
+
   return (
-    <section className=" myRounded m-2 bg-gray-100">
+    <section className="myRounded m-2 bg-gray-100">
       <div className="grid grid-cols-5 gap-2 p-2 text-center">
         <div className="myRounded myFontStyle col-span-5 h-36 bg-gradient-to-b from-purple-400 to-purple-500">
           <h3 className="text-2xl text-purple-900">Total Budget Bank</h3>
@@ -116,12 +107,10 @@ const Hero = () => {
           </p>
         </div>
       </div>
-      <div className=" flex w-full justify-center gap-2 ">
-        <form onChange={() => handleSubmit}>
+      <div className="flex w-full justify-center gap-2">
+        <form onSubmit={handleSubmit}>
           <div className="flex flex-col items-center justify-center gap-y-3">
             <h3 className="myFontStyle text-gray-700">Now Send</h3>
-            {/* <p>{ amount}</p> */}
-
             <div className="flex flex-col justify-center text-center">
               <select
                 id="items"
@@ -129,19 +118,19 @@ const Hero = () => {
                 onChange={handleChangeOption}
               >
                 <option id="addMoneyId" value="Add Money">
-                  Add Money
+                  + Add Money
                 </option>
                 <option id="productId" value="Products">
-                  Products
+                  - Products Buy
                 </option>
                 <option id="withdrawalId" value="Withdrawal">
-                  Withdrawal
+                  - Withdrawal
                 </option>
                 <option id="cashId" value="Cash In">
-                  Cash In
+                  + Cash In
                 </option>
                 <option id="eatingId" value="Eating">
-                  Eating
+                  - Eating
                 </option>
               </select>
             </div>
@@ -159,10 +148,8 @@ const Hero = () => {
               onChange={handleCommitChange}
               className="myRounded font-semibold shadow-lg outline-none"
             />
-
             <button
               type="submit"
-              onClick={handleSubmit}
               className="myRounded mb-5 bg-orange-500 font-semibold text-white shadow-lg focus:bg-red-500"
             >
               Submit
@@ -173,4 +160,5 @@ const Hero = () => {
     </section>
   );
 };
+
 export default Hero;
