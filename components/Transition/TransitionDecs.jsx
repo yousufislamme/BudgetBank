@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-const TransitionDecs = ({ amount, commit }) => {
+const TransitionDecs = ({ amount, commit, className }) => {
   return (
     <>
       <motion.div
@@ -11,7 +11,7 @@ const TransitionDecs = ({ amount, commit }) => {
           duration: 0.5,
           x: { duration: 1 },
         }}
-        className="myRounded mx-auto flex min-w-[300px] bg-gray-50 px-5 py-2"
+        className={`${className} myRounded mx-auto flex min-w-[300px] bg-gray-50 px-5 py-2`}
       >
         <div className="mr-3">
           <svg
