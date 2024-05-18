@@ -29,7 +29,7 @@ const TransitionDecs = ({ amount, commit, className }) => {
             />
           </svg>
         </div>
-        <h2 className="flex w-full items-center justify-between">
+        <h2 className="flex w-full items-center justify-between text-sm">
           <p>{commit}</p> | <p>{amount}</p>
         </h2>
       </motion.div>
